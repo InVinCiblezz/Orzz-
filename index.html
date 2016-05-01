@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>关于如何在LNMP环境下搭建多版本PHP by InVinCiblezz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">关于如何在LNMP环境下搭建多版本PHP</h1>
+      <h2 class="project-tagline">关于如何在LNMP环境下搭建多版本PHP</h2>
+      <a href="https://github.com/InVinCiblezz/Orzz-" class="btn">View on GitHub</a>
+      <a href="https://github.com/InVinCiblezz/Orzz-/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/InVinCiblezz/Orzz-/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <p><strong>linux版本：64位CentOS 6.4</strong>
+<strong>Nginx版本：nginx1.8.0+</strong>
+<strong>php版本： php7.05 &amp;php5.6.20</strong>
+安装第二个版本的PHP</p>
+
+<h1>
+<a id="wget-php下载地址" class="anchor" href="#wget-php%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>wget #PHP下载地址</h1>
+
+<h1>
+<a id="tar-zxvf-php下载文件targz" class="anchor" href="#tar-zxvf-php%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6targz" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>tar zxvf #php下载文件.tar.gz</h1>
+
+<h1>
+<a id="cd-php所在目录下" class="anchor" href="#cd-php%E6%89%80%E5%9C%A8%E7%9B%AE%E5%BD%95%E4%B8%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>cd #php所在目录下</h1>
+
+<h1>
+<a id="configure---prefixusrlocal文件夹名-" class="anchor" href="#configure---prefixusrlocal%E6%96%87%E4%BB%B6%E5%A4%B9%E5%90%8D-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>./configure --prefix=/usr/local/#文件夹名 \</h1>
+
+<p>--with-curl \
+--with-freetype-dir \
+--with-gd \
+--with-gettext \
+--with-iconv-dir \
+--with-kerberos \
+--with-libdir=lib64 \
+--with-libxml-dir \
+--with-MySQL \
+--with-mysqli \
+--with-openssl \
+--with-pcre-regex \
+--with-pdo-MySQL \
+--with-pdo-sqlite \
+--with-pear \
+--with-png-dir \
+--with-xmlrpc \
+--with-xsl \
+--with-zlib \
+--enable-fpm \
+--enable-bcmath \
+--enable-libxml \
+--enable-inline-optimization \
+--enable-gd-native-ttf \
+--enable-mbregex \
+--enable-mbstring \
+--enable-pcntl \
+--enable-shmop \
+--enable-soap \
+--enable-sockets \
+--enable-sysvsem \
+--enable-xml \
+--enable-zip</p>
+
+<h1>
+<a id="make---make-install" class="anchor" href="#make---make-install" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>make &amp;&amp;  make install</h1>
+
+<p>修改php-fpm.conf的侦听端口为9001，因为主版本7.05是侦听9000。</p>
+
+<h1>
+<a id="php-fpmconf下的内容" class="anchor" href="#php-fpmconf%E4%B8%8B%E7%9A%84%E5%86%85%E5%AE%B9" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>php-fpm.conf下的内容</h1>
+
+<p>[php] view plain copy
+; Note: This value is mandatory.<br>
+listen = 127.0.0.1:9001 #
+<strong>启动php-fpm</strong></p>
+
+<h1>
+<a id="etcinitdphp-fpm56" class="anchor" href="#etcinitdphp-fpm56" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>/etc/init.d/php-fpm5.6</h1>
+
+<h1>
+<a id="配置nginx" class="anchor" href="#%E9%85%8D%E7%BD%AEnginx" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>配置Nginx</strong>
+</h1>
+
+<h1>
+<a id="增加一段新的端口8054的配置并指向到9001以及指定目录即可" class="anchor" href="#%E5%A2%9E%E5%8A%A0%E4%B8%80%E6%AE%B5%E6%96%B0%E7%9A%84%E7%AB%AF%E5%8F%A38054%E7%9A%84%E9%85%8D%E7%BD%AE%E5%B9%B6%E6%8C%87%E5%90%91%E5%88%B09001%E4%BB%A5%E5%8F%8A%E6%8C%87%E5%AE%9A%E7%9B%AE%E5%BD%95%E5%8D%B3%E5%8F%AF" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>增加一段新的端口8054的配置并指向到9001以及指定目录即可：</strong>
+</h1>
+
+<p>nginx的配置文件nginx.conf在</p>
+
+<h1>
+<a id="cd-usrlocalnginxconf--下" class="anchor" href="#cd-usrlocalnginxconf--%E4%B8%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>cd /usr/local/nginx/conf  下</h1>
+
+<p>server {
+        listen       8054;
+        server_name  localhost;</p>
+
+<pre><code>    location / {
+            root    html;
+            #root /usr/local/php5;
+            try_files $uri $uri/ /index.php?$query_string;
+            index   index.html index.htm;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+            root   html;
+    }
+
+    location ~ \.php$ {
+            root             html;
+            fastcgi_pass    127.0.0.1:9001;
+            fastcgi_index   index.php;
+            include         fastcgi_params;
+            fastcgi_param   SCRIPT_FILENAME $DOCUMENT_ROOT$fastcgi_script_name;
+                                    #/usr/local/php5$fastcgi_script_name;  
+    }
+
+}
+</code></pre>
+
+<p><strong># 下方是完整的nginx.conf的代码</strong>
+        #location ~ /.ht {
+        #    deny  all;
+        #}
+    }
+    server {
+        listen       8054;
+        server_name  localhost;</p>
+
+<pre><code>    location / {
+            root    html;
+            #root /usr/local/php5;
+            try_files $uri $uri/ /index.php?$query_string;
+            index   index.html index.htm;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+            root   html;
+    }
+            #root /usr/local/php5;
+            try_files $uri $uri/ /index.php?$query_string;
+            index   index.html index.htm;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+            root   html;
+    }
+
+    location ~ \.php$ {
+            root             html;
+            fastcgi_pass    127.0.0.1:9001;
+            fastcgi_index   index.php;
+            include         fastcgi_params;
+            fastcgi_param   SCRIPT_FILENAME $DOCUMENT_ROOT$fastcgi_script_name;
+                                    #/usr/local/php5$fastcgi_script_name;  
+    }
+
+}
+
+
+# another virtual host using mix of IP-, name-, and port-based configuration
+#
+#server {
+#    listen       8000;
+#    listen       somename:8080;
+#    server_name  somename  alias  another.alias;
+
+#    location / {
+#        root   html;
+#        index  index.html index.htm;
+#    }
+#}
+</code></pre>
+
+<h1>
+<a id="user--nobody" class="anchor" href="#user--nobody" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>user  nobody;</h1>
+
+<p>worker_processes  1;</p>
+
+<h1>
+<a id="error_log--logserrorlog" class="anchor" href="#error_log--logserrorlog" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>error_log  logs/error.log;</h1>
+
+<h1>
+<a id="error_log--logserrorlog--notice" class="anchor" href="#error_log--logserrorlog--notice" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>error_log  logs/error.log  notice;</h1>
+
+<h1>
+<a id="error_log--logserrorlog--info" class="anchor" href="#error_log--logserrorlog--info" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>error_log  logs/error.log  info;</h1>
+
+<h1>
+<a id="pid--------logsnginxpid" class="anchor" href="#pid--------logsnginxpid" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>pid        logs/nginx.pid;</h1>
+
+<p>events {
+    worker_connections  1024;
+}</p>
+
+<p>http {
+    include       mime.types;
+    default_type  application/octet-stream;</p>
+
+<pre><code>#log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+#                  '$status $body_bytes_sent "$http_referer" '
+#                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+#access_log  logs/access.log  main;
+
+sendfile        on;
+#tcp_nopush     on;
+
+#keepalive_timeout  0;
+keepalive_timeout  65;
+
+#gzip  on;
+
+server {
+    listen       80;
+    server_name  localhost;
+
+    #charset koi8-r;
+
+    #access_log  logs/host.access.log  main;
+
+    location / {
+        root   html;
+        try_files $uri $uri/ /index.php?$query_string;
+        index  index.html index.htm;
+    }
+
+    #error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   html;
+    }
+
+    # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+    #
+    #location ~ \.php$ {
+    #    proxy_pass   http://127.0.0.1;
+    #}
+
+    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+    #
+    location ~ \.php$ {
+        root           html;
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  $DOCUMENT_ROOT$fastcgi_script_name;
+        include        fastcgi_params;
+    }
+
+    # deny access to .htaccess files, if Apache's document root
+    # concurs with nginx's one
+    #
+    #location ~ /\.ht {
+    #    deny  all;
+    #}
+}
+server {
+    listen       8054;
+    server_name  localhost;
+
+    location / {
+            root    html;
+            #root /usr/local/php5;
+            try_files $uri $uri/ /index.php?$query_string;
+            index   index.html index.htm;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+            root   html;
+    }
+
+    location ~ \.php$ {
+            root             html;
+            fastcgi_pass    127.0.0.1:9001;
+            fastcgi_index   index.php;
+            include         fastcgi_params;
+            fastcgi_param   SCRIPT_FILENAME $DOCUMENT_ROOT$fastcgi_script_name;
+                                    #/usr/local/php5$fastcgi_script_name;  
+    }
+
+}
+
+
+# another virtual host using mix of IP-, name-, and port-based configuration
+#
+#server {
+#    listen       8000;
+#    listen       somename:8080;
+#    server_name  somename  alias  another.alias;
+
+#    location / {
+#        root   html;
+#        index  index.html index.htm;
+#    }
+#}
+
+
+# HTTPS server
+#
+#server {
+#    listen       443 ssl;
+#    server_name  localhost;
+
+#    ssl_certificate      cert.pem;
+#    ssl_certificate_key  cert.key;
+
+#    ssl_session_cache    shared:SSL:1m;
+#    ssl_session_timeout  5m;
+
+#    ssl_ciphers  HIGH:!aNULL:!MD5;
+#    ssl_prefer_server_ciphers  on;
+
+#    location / {
+#        root   html;
+#        index  index.html index.htm;
+#    }
+#}
+</code></pre>
+
+<p>}</p>
+
+<p><strong>重启nginx</strong>
+<strong># /usr/local/nginx/sbin/nginx -s reload</strong></p>
+
+<p><strong>注意需要防火墙增加新端口的开启，不然无法访问：</strong>
+<strong>防火墙配置</strong>
+<strong>注意如果你希望在本地机器例如xp访问虚拟机的网页，如果是centos6需要修改防火墙启动80端口</strong>
+<strong># cd /etc/sysconfig</strong>
+<strong>修改iptables文件，或者直接用vim编辑</strong>
+<strong># vim /etc/sysconfig/iptables</strong>
+<strong>添加下面一行，打开防火墙80端口:</strong>
+<strong>-A INPUT -m state --state NEW -m tcp -p tcp --dport 8054 -j ACCEPT</strong>
+<strong>重启防火墙</strong>
+<strong># /etc/init.d/iptables restart</strong></p>
+
+<p>测试是否成功，查看phpinfo()
+//我是把根目录设置在nginx/html下的，vim a.php，调用phpinfo(),再用<a href="http://192.168.2.187/a.php">http://192.168.2.187/a.php</a> and  <a href="http://192.168.2.187:8054/a.php%E6%9D%A5%E8%AE%BF%E9%97%AE">http://192.168.2.187:8054/a.php来访问</a>
+//(ip请选择自己的，第二个端口我是设置成8054)</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/InVinCiblezz/Orzz-">关于如何在LNMP环境下搭建多版本PHP</a> is maintained by <a href="https://github.com/InVinCiblezz">InVinCiblezz</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
